@@ -15,5 +15,5 @@ spec:
         app: worker
     spec:
       containers:
-      - image: dockersamples/examplevotingapp_worker
+      - image: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:worker
         name: worker
