@@ -3,6 +3,7 @@ kind: Service
 metadata:
   labels:
     app: db
+  namespace: voting-app
   name: db
 spec:
   type: ClusterIP

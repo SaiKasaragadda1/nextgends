@@ -3,6 +3,7 @@ kind: Service
 metadata:
   labels:
     app: result
+  namespace: voting-app
   name: result
 spec:
   type: NodePort
