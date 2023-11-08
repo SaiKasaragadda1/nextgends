@@ -1,0 +1,45 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-vote-result
+  namespace: voting-app
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    external-dns.alpha.kubernetes.io/hostname: mobile.generic123.net
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/group.name: "prod-external"
+spec:
+  rules:
+    - host: nextgends-rac3.axle-interns.com
+      http:
+        paths:
+          - path: /vote 
+            pathType: Exact
+            backend:
+              service:
+                name: ssl-redirect
+                port:
+                  name: use-annotation
+          - path: /vote
+            pathType: Exact 
+            backend: 
+              service:
+                name: vote
+                port:
+                  number: 5000
+          - path: /result
+            pathType: Exact
+            backend:
+              service:
+                name: ssl-redirect
+                port:
+                  name: use-annotation
+          - path: /result
+            pathType: Exact
+            backend:
+              service:
+                name: vote
+                port:
+                  number: 5001
