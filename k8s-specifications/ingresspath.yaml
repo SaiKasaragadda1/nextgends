@@ -19,7 +19,7 @@ spec:
             pathType: Exact
             backend:
               service:
-                name: ssl-redirect
+                name: vote
                 port:
                   name: use-annotation
           - path: /vote
