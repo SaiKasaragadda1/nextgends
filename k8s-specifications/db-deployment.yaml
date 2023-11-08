@@ -21,7 +21,7 @@ spec:
         app: db
     spec:
       containers:
-      - image: postgres:15-alpine
+      - image: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:postgres
         name: postgres
         env:
         - name: POSTGRES_USER
