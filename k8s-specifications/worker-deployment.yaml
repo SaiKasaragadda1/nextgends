@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: worker
+  namespace: voting-app
   name: worker
 spec:
   replicas: 1
