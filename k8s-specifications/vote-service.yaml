@@ -8,7 +8,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: "vote-service"
+  - name: vote-service
     port: 5000
     targetPort: 80
     nodePort: 31000
