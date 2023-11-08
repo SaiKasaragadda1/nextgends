@@ -4,7 +4,7 @@ metadata:
   labels:
     app: vote
   namespace: voting-app
-  name: vote-service
+  name: vote
 spec:
   type: NodePort
   ports:
@@ -32,6 +32,6 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: vote-service
+              name: vote
               port:
                 number: 80
