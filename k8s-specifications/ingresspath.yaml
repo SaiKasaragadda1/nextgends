@@ -1,22 +1,4 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ingress-voting
-  namespace: voting-app
-  annotations:
-    kubernetes.io/ingress.class: ingress-nginx
-spec:
-  rules:
-  - host: nextgends-rac3.axle-interns.com
-    http:
-      paths:
-      - path: /vote
-        pathType: Exact
-        backend:
-          service:
-            name: vote
-            port:
-              number: 5000
+
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
 # metadata:
