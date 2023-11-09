@@ -4,9 +4,6 @@ metadata:
   name: ingress-voting
   namespace: voting-app
 spec:
-  backend:
-    serviceName: db
-    servicePort: 5432
   rules:
   - host: nextgends-rac3.axle-interns.com
     http:
