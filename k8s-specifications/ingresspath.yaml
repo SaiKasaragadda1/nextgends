@@ -60,21 +60,21 @@ spec:
   rules:
     - host: nextgends-rac3.axle-interns.com
         http:
-        paths:
-        - path: /vote
-          pathType: Prefix
-          backend:
-            service:
-              name: vote
-              port:
-                number: 5000
+          paths:
+          - path: /vote
+            pathType: Prefix
+            backend:
+              service:
+                name: vote
+                port:
+                  number: 5000
     - host: nextgends-rac3.axle-interns.com
         http:
-        paths:
-        - path: /result
-          pathType: Prefix
-          backend:
-            service:
-              name: result
-              port:
-                number: 5001
+          paths:
+          - path: /result
+            pathType: Prefix
+            backend:
+              service:
+                name: result
+                port:
+                  number: 5001
