@@ -17,14 +17,14 @@ spec:
             service:
               name: vote
               port:
-                number: 5000
+                number: 80
         - path: /result
           pathType: Prefix
           backend:
             service:
               name: result
               port:
-                number: 5001
+                number: 80
               
 # spec:
 #   rules:
