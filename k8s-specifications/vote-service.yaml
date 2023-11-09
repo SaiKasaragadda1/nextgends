@@ -6,7 +6,7 @@ metadata:
   namespace: voting-app
   name: vote
 spec:
-  type: NodePort
+  # type: NodePort
   ports:
   # - name: "vote-service"
   - port: 80

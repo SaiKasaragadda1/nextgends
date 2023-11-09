@@ -6,7 +6,7 @@ metadata:
   namespace: voting-app
   name: result
 spec:
-  type: NodePort
+  # type: NodePort
   ports:
   # - name: "result-service"
   - port: 80
