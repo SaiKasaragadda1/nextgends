@@ -13,14 +13,14 @@ spec:
       http:
         paths:
         - path: /vote
-          # pathType: Prefix
+          pathType: Prefix
           backend:
             service:
               name: vote
               port:
                 number: 80
         - path: /result
-          # pathType: Prefix
+          pathType: Prefix
           backend:
             service:
               name: result
