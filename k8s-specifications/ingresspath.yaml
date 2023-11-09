@@ -1,46 +1,51 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  namespace: voting-app
   name: ingress-voting
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
+  namespace: voting-app
 spec:
-  ingressClassName: alb
+  backend:
+    serviceName: db
+    servicePort: 5432
   rules:
-    - http:
-        paths:
-        - path: /vote
-          pathType: Exact
-          backend:
-            service:
-              name: vote
-              port:
-                number: 5000
-        - path: /result
-          pathType: Exact
-          backend:
-            service:
-              name: result
-              port:
-                number: 5001        
+  - host: nextgends-rac3.axle-interns.com
+    http:
+      paths:
+      - path: /vote/*
+        backend:
+          serviceName: vote
+          servicePort: 5000
+  - host: nextgends-rac3.axle-interns.com
+    http:
+      paths:
+      - path: /result/*
+        backend:
+          serviceName: result
+          servicePort: 5001
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   namespace: voting-app
+#   name: ingress-voting
+#   annotations:
+#     alb.ingress.kubernetes.io/scheme: internet-facing
+#     alb.ingress.kubernetes.io/target-type: ip
 # spec:
+#   ingressClassName: alb
 #   rules:
-#     - host: nextgends-rac3.axle-interns.com
-#       http:
+#     - http:
 #         paths:
-#           - path: /vote
-#             pathType: Exact 
-#             backend: 
-#               service:
-#                 name: vote
-#                 port:
-#                   number: 5000
-#           - path: /result
-#             pathType: Exact
-#             backend:
-#               service:
-#                 name: result
-#                 port:
-#                   number: 5001
+#         - path: /vote
+#           pathType: Exact
+#           backend:
+#             service:
+#               name: vote
+#               port:
+#                 number: 5000
+#         - path: /result
+#           pathType: Exact
+#           backend:
+#             service:
+#               name: result
+#               port:
+#                 number: 5001        
