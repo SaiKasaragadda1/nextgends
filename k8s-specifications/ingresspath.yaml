@@ -11,15 +11,15 @@ spec:
   rules:
     - http:
         paths:
-        - path: /
-          pathType: Prefix
+        - path: /vote
+          pathType: Exact
           backend:
             service:
               name: vote
               port:
                 number: 5000
-        - path: /
-          pathType: Prefix
+        - path: /result
+          pathType: Exact
           backend:
             service:
               name: result
