@@ -41,4 +41,4 @@ spec:
         imagePullPolicy: Always
         name: vote
         ports:
-        - containerPort: 80
+        - containerPort: 5000

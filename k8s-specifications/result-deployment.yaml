@@ -42,4 +42,4 @@ spec:
         imagePullPolicy: Always
         name: result
         ports:
-        - containerPort: 80
+        - containerPort: 5001

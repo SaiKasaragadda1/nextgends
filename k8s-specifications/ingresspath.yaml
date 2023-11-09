@@ -58,7 +58,8 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - http:
+    - host: nextgends-rac3.axle-interns.com
+        http:
         paths:
         - path: /vote
           pathType: Prefix
@@ -66,11 +67,14 @@ spec:
             service:
               name: vote
               port:
-                number: 80
+                number: 5000
+    - host: nextgends-rac3.axle-interns.com
+        http:
+        paths:
         - path: /result
           pathType: Prefix
           backend:
             service:
               name: result
               port:
-                number: 80
+                number: 5001
