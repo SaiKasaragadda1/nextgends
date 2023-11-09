@@ -9,13 +9,13 @@ spec:
   type: NodePort
   ports:
   # - name: "vote-service"
-    - port: 80
-      targetPort: 80
+  - port: 80
+    targetPort: 80
     #nodePort: 31000
-      protocol: TCP
-      name: http
-    selector:
-      app: vote
+    protocol: TCP
+    name: http
+  selector:
+    app: vote
 # ---
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
