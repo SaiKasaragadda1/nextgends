@@ -3,24 +3,24 @@ kind: Ingress
 metadata:
   name: ingress-vote-result
   namespace: voting-app
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
+  # annotations:
+  #   alb.ingress.kubernetes.io/scheme: internet-facing
+  #   alb.ingress.kubernetes.io/target-type: ip
 spec:
-  ingressClassName: alb
+  # ingressClassName: alb
   rules:
     - host: nextgends-rac3.axle-interns.com
       http:
         paths:
         - path: /vote
-          pathType: Prefix
+          # pathType: Prefix
           backend:
             service:
               name: vote
               port:
                 number: 80
         - path: /result
-          pathType: Prefix
+          # pathType: Prefix
           backend:
             service:
               name: result
