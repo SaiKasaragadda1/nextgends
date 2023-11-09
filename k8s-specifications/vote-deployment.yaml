@@ -20,4 +20,4 @@ spec:
         name: vote
         ports:
         - containerPort: 80
-          name: vote
+          # name: vote
