@@ -9,23 +9,42 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     external-dns.alpha.kubernetes.io/hostname: nextgends-rac3.axle-interns.com
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
-    alb.ingress.kubernetes.io/group.name: "prod-external"
 spec:
+  ingressClassName: alb
   rules:
-    - host: nextgends-rac3.axle-interns.com
-      http:
+    - http:
         paths:
-          - path: /vote
-            pathType: Exact 
-            backend: 
-              service:
-                name: vote
-                port:
-                  number: 5000
-          - path: /result
-            pathType: Exact
-            backend:
-              service:
-                name: result
-                port:
-                  number: 5001
+        - path: /vote
+          pathType: Prefix
+          backend:
+            service:
+              name: vote
+              port:
+                number: 5000
+        - path: /result
+          pathType: Prefix
+          backend:
+            service:
+              name: result
+              port:
+                number: 5001
+              
+# spec:
+#   rules:
+#     - host: nextgends-rac3.axle-interns.com
+#       http:
+#         paths:
+#           - path: /vote
+#             pathType: Exact 
+#             backend: 
+#               service:
+#                 name: vote
+#                 port:
+#                   number: 5000
+#           - path: /result
+#             pathType: Exact
+#             backend:
+#               service:
+#                 name: result
+#                 port:
+#                   number: 5001
