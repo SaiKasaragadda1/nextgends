@@ -38,16 +38,16 @@
 #               port:
 #                 number: 5001
 
-apiVersion: v1
-kind: Service
-metadata:
-  namespace: voting-app
-  name: result
-spec:
-  ports:
-    - port: 5001
-      targetPort: 80
-      protocol: TCP
-  type: NodePort
-  selector:
-    app: result
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   namespace: voting-app
+#   name: result
+# spec:
+#   ports:
+#     - port: 5001
+#       targetPort: 80
+#       protocol: TCP
+#   type: NodePort
+#   selector:
+#     app: result

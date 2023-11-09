@@ -22,24 +22,24 @@
 #         - containerPort: 80
 #           # name: result
 
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  namespace: voting-app
-  name: result
-spec:
-  selector:
-    matchLabels:
-      app: result
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: result
-    spec:
-      containers:
-      - image: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:result
-        imagePullPolicy: Always
-        name: result
-        ports:
-        - containerPort: 5001
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   namespace: voting-app
+#   name: result
+# spec:
+#   selector:
+#     matchLabels:
+#       app: result
+#   replicas: 1
+#   template:
+#     metadata:
+#       labels:
+#         app: result
+#     spec:
+#       containers:
+#       - image: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:result
+#         imagePullPolicy: Always
+#         name: result
+#         ports:
+#         - containerPort: 5001

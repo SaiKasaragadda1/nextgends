@@ -1,36 +1,15 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   labels:
-#     app: vote
-#   namespace: voting-app
-#   name: vote
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: vote
-#   template:
-#     metadata:
-#       labels:
-#         app: vote
-#     spec:
-#       containers:
-#       - image: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:vote
-#         name: vote
-#         ports:
-#         - containerPort: 80
-#           # name: vote
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app: vote
   namespace: voting-app
   name: vote
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: vote
-  replicas: 1
   template:
     metadata:
       labels:
@@ -38,7 +17,28 @@ spec:
     spec:
       containers:
       - image: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:vote
-        imagePullPolicy: Always
         name: vote
         ports:
-        - containerPort: 5000
+        - containerPort: 80
+          # name: vote
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   namespace: voting-app
+#   name: vote
+# spec:
+#   selector:
+#     matchLabels:
+#       app: vote
+#   replicas: 1
+#   template:
+#     metadata:
+#       labels:
+#         app: vote
+#     spec:
+#       containers:
+#       - image: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:vote
+#         imagePullPolicy: Always
+#         name: vote
+#         ports:
+#         - containerPort: 5000
