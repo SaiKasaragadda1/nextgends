@@ -19,7 +19,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   namespace: voting-app
-  name: ingress-vote
+  name: ingress-vote-result
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
