@@ -15,13 +15,6 @@ spec:
     - host: nextgends-rac3.axle-interns.com
       http:
         paths:
-          - path: /vote 
-            pathType: Exact
-            backend:
-              service:
-                name: vote
-                port:
-                  name: use-annotation
           - path: /vote
             pathType: Exact 
             backend: 
@@ -29,13 +22,6 @@ spec:
                 name: vote
                 port:
                   number: 5000
-          - path: /result
-            pathType: Exact
-            backend:
-              service:
-                name: ssl-redirect
-                port:
-                  name: use-annotation
           - path: /result
             pathType: Exact
             backend:
