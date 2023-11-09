@@ -20,4 +20,4 @@ spec:
         name: result
         ports:
         - containerPort: 80
-          # name: result
+          name: result
