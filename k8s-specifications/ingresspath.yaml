@@ -7,7 +7,7 @@ metadata:
   namespace: voting-app
 spec:
   #Used to target the nginx ingress controller default is nginx
-  ingressClassName: nginx
+  ingressClassName: nginx1
   rules:
     - host: nextgends-rac3.axle-interns.com
       http:
