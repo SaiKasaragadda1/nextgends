@@ -19,14 +19,14 @@ spec:
               service:
                 name: vote-internal
                 port: 
-                  number: 80
+                  number: 5000
           - path: /result
             pathType: Prefix
             backend:
               service:
                 name: result-internal
                 port: 
-                  number: 80
+                  number: 5001
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
 # metadata:
