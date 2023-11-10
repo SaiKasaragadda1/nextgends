@@ -13,3 +13,19 @@ spec:
   selector:
     app: vote
   type: ClusterIP
+  ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: result-internal
+  namespace: voting-app
+  labels:
+    app: result
+spec:
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 80
+  selector:
+    app: result
+  type: ClusterIP
