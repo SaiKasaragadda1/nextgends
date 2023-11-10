@@ -9,7 +9,7 @@ spec:
   #Used to target the nginx ingress controller default is nginx
   ingressClassName: nginx
   rules:
-    - host: nextgends-rac3.axle-interns.com/vote
+    - host: nextgends-rac3.axle-interns.com
       http:
         paths:
           - path: /
