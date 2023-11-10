@@ -1,25 +1,24 @@
-
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: ingress-voting
-#   namespace: voting-app
-# spec:
-#   rules:
-#   - host: nextgends-rac3.axle-interns.com
-#     http:
-#       paths:
-#       - path: /vote/*
-#         backend:
-#           serviceName: vote
-#           servicePort: 5000
-#   - host: nextgends-rac3.axle-interns.com
-#     http:
-#       paths:
-#       - path: /result/*
-#         backend:
-#           serviceName: result
-#           servicePort: 5001
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "true"
+  name: Ingress-vote
+  namespace: voting-app
+spec:
+  #Used to target the nginx ingress controller default is nginx
+  ingressClassName: nginx
+  rules:
+    - host: nextgends-rac3.axle-interns.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: vote
+                port: 
+                  number: 80
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
 # metadata:
