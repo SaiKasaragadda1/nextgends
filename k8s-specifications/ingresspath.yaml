@@ -12,7 +12,7 @@ spec:
     - host: nextgends-rac3.axle-interns.com
       http:
         paths:
-          - path: /
+          - path: /vote
             pathType: Prefix
             backend:
               service:
