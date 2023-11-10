@@ -13,7 +13,7 @@ spec:
   selector:
     app: vote
   type: ClusterIP
-  ---
+---
 apiVersion: v1
 kind: Service
 metadata:
