@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   annotations:
     ingress.kubernetes.io/ssl-redirect: "true"
-  name: Ingress-vote
+  name: ingress-vote
   namespace: voting-app
 spec:
   #Used to target the nginx ingress controller default is nginx
