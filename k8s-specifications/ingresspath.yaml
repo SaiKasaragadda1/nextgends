@@ -20,7 +20,7 @@ spec:
                 name: vote-internal
                 port: 
                   number: 5000
-          - path: /result/(*)
+          - path: /result/(.*)
             pathType: Prefix
             backend:
               service:
