@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   annotations:
     ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
   name: ingress-vote
   namespace: voting-app
 spec:
@@ -13,15 +13,15 @@ spec:
     - host: nextgends-rac3.axle-interns.com
       http:
         paths:
-          - path: /
+          - path: /(.*)
             pathType: Prefix
             backend:
               service:
                 name: vote-internal
                 port: 
                   number: 5000
-          - path: /result
-            pathType: Exact
+          - path: /result/(*)
+            pathType: Prefix
             backend:
               service:
                 name: result-internal
