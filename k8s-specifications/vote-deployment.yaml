@@ -19,5 +19,5 @@ spec:
       - image: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:vote
         name: vote
         ports:
-        - containerPort: 80
+        - containerPort: 5000
           name: vote

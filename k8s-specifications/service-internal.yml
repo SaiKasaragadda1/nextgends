@@ -8,8 +8,8 @@ metadata:
 spec:
   ports:
     - protocol: "TCP"
-      port: 5000
-      targetPort: 80
+      port: 80
+      targetPort: 5000
   selector:
     app: vote
   type: ClusterIP
@@ -24,8 +24,8 @@ metadata:
 spec:
   ports:
     - protocol: "TCP"
-      port: 5001
-      targetPort: 80
+      port: 80
+      targetPort: 5001
   selector:
     app: result
   type: ClusterIP
