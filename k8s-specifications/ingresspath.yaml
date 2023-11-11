@@ -21,7 +21,7 @@ spec:
                 port: 
                   number: 5000
           - path: /result
-            pathType: Prefix
+            pathType: Exact
             backend:
               service:
                 name: result-internal
