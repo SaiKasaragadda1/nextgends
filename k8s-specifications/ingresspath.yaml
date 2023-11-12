@@ -1,9 +1,6 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
   name: ingress-vote
   namespace: voting-app
 spec:
@@ -13,14 +10,14 @@ spec:
     - host: nextgends-rac3.axle-interns.com
       http:
         paths:
-          - path: /(.*)
+          - path: /
             pathType: Prefix
             backend:
               service:
                 name: vote-internal
                 port: 
                   number: 80
-          - path: /result(.*)
+          - path: /result
             pathType: Prefix
             backend:
               service:
