@@ -19,6 +19,9 @@ spec:
                 name: vote-internal
                 port: 
                   number: 80
+    - host: nextgends-rac3.axle-interns.com
+      http:
+        paths:
           - path: /result
             pathType: Prefix
             backend:
