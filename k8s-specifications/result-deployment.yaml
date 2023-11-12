@@ -16,7 +16,7 @@ spec:
         app: result
     spec:
       containers:
-      - image: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:result1
+      - image: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:result
         name: result
         ports:
         - containerPort: 80
