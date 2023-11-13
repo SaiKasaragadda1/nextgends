@@ -10,7 +10,7 @@ spec:
   #Used to target the nginx ingress controller default is nginx
   ingressClassName: nginx
   rules:
-    - host: ad-rac3.axle-interns.com
+    - host: result-nextgends-rac3.axle-interns.com
       http:
         paths:
           - path: /
