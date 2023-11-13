@@ -13,7 +13,6 @@ spec:
     targetPort: 80
     nodePort: 31001
     protocol: TCP
-    name: http
   selector:
     app: result
 ---
@@ -28,8 +27,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - host: result-nextgends-rac3.axle-interns.com
-      http:
+    - http:
         paths:
         - path: /
           pathType: Prefix
