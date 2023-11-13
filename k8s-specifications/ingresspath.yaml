@@ -20,16 +20,6 @@ spec:
                 name: vote-internal
                 port: 
                   number: 5000
-    - host: ad-rac3.axle-interns.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: result-internal
-                port: 
-                  number: 5001
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
 # metadata:

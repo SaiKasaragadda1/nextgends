@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  name: ingress-result
+  namespace: voting-app
+spec:
+  #Used to target the nginx ingress controller default is nginx
+  ingressClassName: nginx
+  rules:
+    - host: ad-rac3.axle-interns.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: result-internal
+                port: 
+                  number: 5001
