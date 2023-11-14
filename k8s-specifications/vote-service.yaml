@@ -27,7 +27,8 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - http:
+    - host: vote-nextgends-rac3.axle-interns.com
+      http:
         paths:
         - path: /
           pathType: Prefix
