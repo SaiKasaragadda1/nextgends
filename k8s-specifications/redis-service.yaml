@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     app: redis
-  namespace: voting-app
+  namespace: voting-app2
   name: redis
 spec:
   type: ClusterIP
