@@ -48,13 +48,13 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: vote
+              name: "vote-service"
               port:
                 number: 5000
         - path: /result
           pathType: Prefix
           backend:
             service:
-              name: result
+              name: "result-service"
               port:
                 number: 5001
