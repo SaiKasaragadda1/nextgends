@@ -30,7 +30,7 @@ spec:
   tls:
   - hosts:
     - vote-nextgends-rac3.axle-interns.com
-    secretName: result-cert
+    secretName: vote-cert
   ingressClassName: alb
   rules:
     - host: vote-nextgends-rac3.axle-interns.com
