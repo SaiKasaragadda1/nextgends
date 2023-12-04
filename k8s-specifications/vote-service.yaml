@@ -29,16 +29,6 @@ metadata:
     alb.ingress.kubernetes.io/ssl-redirect: '443'
     # Ingress Core Settings
     kubernetes.io/ingress.class: "alb"
-    # Health Check Settings
-    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP 
-    alb.ingress.kubernetes.io/healthcheck-port: traffic-port
-#Important Note:  Need to add health check path annotations in service level if we are planning to use multiple targets in a load balancer    
-    #alb.ingress.kubernetes.io/healthcheck-path: /usermgmt/health-status
-    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '15'
-    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '5'
-    alb.ingress.kubernetes.io/success-codes: '200'
-    alb.ingress.kubernetes.io/healthy-threshold-count: '2'
-    alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
 spec:
   rules:
     - host: vote-nextgends-rac3.axle-interns.com
@@ -48,13 +38,13 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: "vote-service"
+              name: vote
               port:
-                number: 5000
+                number: 80
         - path: /result
           pathType: Prefix
           backend:
             service:
-              name: "result-service"
+              name: result
               port:
-                number: 5001
+                number: 80
