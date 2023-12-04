@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: vote-internal
-  namespace: voting-app
+  namespace: voting-app1
   labels:
     app: vote
 spec:
@@ -18,7 +18,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: result-internal
-  namespace: voting-app
+  namespace: voting-app1
   labels:
     app: result
 spec:

@@ -4,8 +4,9 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/use-regex: "true"
+    kubernetes.io/ingress.class: nginx
   name: ingress-vote
-  namespace: voting-app
+  namespace: voting-app1
 spec:
   #Used to target the nginx ingress controller default is nginx
   ingressClassName: nginx
@@ -13,10 +14,18 @@ spec:
     - host: vote-nextgends-rac3.axle-interns.com
       http:
         paths:
-          - path: /
+          - path: /vote
             pathType: Prefix
             backend:
               service:
                 name: vote-internal
                 port: 
                   number: 5000
+          - path: /result
+            pathType: Prefix
+            backend:
+              service:
+                name: result-internal
+                port: 
+                  number: 5001
+        
