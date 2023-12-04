@@ -24,13 +24,10 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:853931821519:certificate/e6678212-15eb-4d1f-908a-adce5ec60bd3
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
     alb.ingress.kubernetes.io/ssl-redirect: '443'
 spec:
-  tls:
-  - hosts:
-    - result-nextgends-rac3.axle-interns.com
-    secretName: result-cert
   ingressClassName: alb
   rules:
     - host: result-nextgends-rac3.axle-interns.com
