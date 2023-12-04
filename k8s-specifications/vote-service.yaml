@@ -43,14 +43,14 @@ spec:
   rules:
     - http:
         paths:
-        - path: /vote/*
+        - path: /vote
           pathType: Prefix
           backend:
             service:
               name: vote
               port:
                 number: 5000
-        - path: /result/*
+        - path: /result
           pathType: Prefix
           backend:
             service:
