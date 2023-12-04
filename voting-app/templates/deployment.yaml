@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "voting-app.labels" . | nindent 4 }}
+  name: {{ .Values.vote.service.name | quote }}
+  namespace: {{ .Values.vote.service.namespace | quote}}
+spec:
+  replicas: {{ .Values.replicaCount}}
+  selector:
+    matchLabels:
+      {{- include "voting-app.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "voting-app.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - image: {{ .Values.vote.image.repository}}
+        name: {{ .Values.vote.containers.name }}
+        ports:
+        - containerPort: {{ .Values.vote.service.targetport }}
+          name: {{ .Values.vote.containers.name }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "voting-app.labels" . | nindent 4 }}
+  name: {{ .Values.result.service.name | quote }}
+  namespace: {{ .Values.result.service.namespace | quote}}
+spec:
+  replicas: {{ .Values.replicaCount}}
+  selector:
+    matchLabels:
+      {{- include "voting-app.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "voting-app.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - image: {{ .Values.result.image.repository}}
+        name: {{ .Values.result.containers.name }}
+        ports:
+        - containerPort: {{ .Values.result.service.targetport }}
+          name: {{ .Values.result.containers.name }}

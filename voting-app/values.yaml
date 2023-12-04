@@ -1,0 +1,49 @@
+
+replicaCount: 1
+
+result:
+  image:
+    repository: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-regi
+ 
+  service:
+    type: NodePort
+    port: 5001
+    name: result
+    namespace: voting-app
+    targetport: 80
+    nodeport: 31001
+
+  containers:
+    name: result
+
+vote:    
+  image:
+    repository: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:vote1
+ 
+  service:
+    type: NodePort
+    port: 5000
+    name: result
+    namespace: voting-app
+    targetport: 80
+    nodeport: 31000
+
+  containers:
+    name: vote
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
