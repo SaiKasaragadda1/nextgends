@@ -41,7 +41,8 @@ metadata:
     alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
 spec:
   rules:
-    - http:
+    - host: vote-nextgends-rac3.axle-interns.com
+      http:
         paths:
         - path: /vote
           pathType: Prefix
