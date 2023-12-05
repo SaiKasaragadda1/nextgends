@@ -15,36 +15,3 @@ spec:
     protocol: TCP
   selector:
     app: vote
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  namespace: voting-app2
-  name: ingress-alb-vote
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:853931821519:certificate/f0ac5327-5fc3-4cd9-b47c-05828e5dc265
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
-    alb.ingress.kubernetes.io/ssl-redirect: '443'
-    # Ingress Core Settings
-    kubernetes.io/ingress.class: "alb"
-spec:
-  rules:
-    - host: vote-nextgends-rac3.axle-interns.com
-      http:
-        paths:
-        - path: /vote
-          pathType: Prefix
-          backend:
-            service:
-              name: vote
-              port:
-                number: 5000
-        - path: /result
-          pathType: Prefix
-          backend:
-            service:
-              name: result
-              port:
-                number: 5001
