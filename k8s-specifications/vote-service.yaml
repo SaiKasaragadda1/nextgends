@@ -9,8 +9,8 @@ spec:
   type: NodePort
   ports:
   - name: "vote-service"
-    port: 80
-    targetPort: 8080
+    port: 5000
+    targetPort: 80
     nodePort: 31002
     protocol: TCP
   selector:
@@ -40,11 +40,11 @@ spec:
             service:
               name: vote
               port:
-                number: 80
+                number: 5000
         - path: /result
           pathType: Prefix
           backend:
             service:
               name: result
               port:
-                number: 80
+                number: 5001

@@ -9,8 +9,8 @@ spec:
   type: NodePort
   ports:
   - name: "result-service"
-    port: 80
-    targetPort: 8080
+    port: 5001
+    targetPort: 80
     nodePort: 31003
     protocol: TCP
   selector:
