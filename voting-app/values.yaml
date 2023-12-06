@@ -43,7 +43,8 @@ db:
     targetport: 5432
 
   containers:
-    name: db
+    name: postgres
+    app: db
 
 redis:    
   image:

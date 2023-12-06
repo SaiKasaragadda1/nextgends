@@ -46,3 +46,91 @@ spec:
         ports:
         - containerPort: {{ .Values.result.service.targetport }}
           name: {{ .Values.result.containers.name }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "voting-app.labels" . | nindent 4 }}
+  namespace: voting-app
+  name: {{ .Values.db.containers.name}}
+spec:
+  replicas: {{ .Values.replicaCount}}
+  selector:
+    matchLabels:
+      {{- include "voting-app.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "voting-app.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - image: {{ .Values.db.image.repository }}
+        name: {{ .Values.db.containers.name}}
+        env:
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        ports:
+        - containerPort: {{ .Values.db.service.port }}
+          name: {{ .Values.db.containers.name}}
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: db-data
+      volumes:
+      - name: db-data
+        emptyDir: {} 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "voting-app.labels" . | nindent 4 }}
+  namespace: voting-app
+  name: {{ .Values.redis.containers.name }}
+spec:
+  replicas: {{ .Values.replicaCount}}
+  selector:
+    matchLabels:
+      {{- include "voting-app.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "voting-app.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - image: {{ .Values.redis.image.repository }}
+        name: {{ .Values.redis.containers.name }}
+        ports:
+        - containerPort: {{ .Values.redis.service.port }}
+          name: {{ .Values.redis.containers.name }}
+        volumeMounts:
+        - mountPath: /data
+          name: redis-data
+      volumes:
+      - name: redis-data
+        emptyDir: {} 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "voting-app.labels" . | nindent 4 }}
+  namespace: voting-app
+  name: {{ .Values.worker.containers.name }}
+spec:
+  replicas: {{ .Values.replicaCount}}
+  selector:
+    matchLabels:
+      {{- include "voting-app.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "voting-app.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - image: {{ .Values.worker.image.repository }}
+        name: {{ .Values.worker.containers.name }}
+
