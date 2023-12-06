@@ -112,25 +112,3 @@ spec:
       volumes:
       - name: redis-data
         emptyDir: {} 
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    {{- include "voting-app.labels" . | nindent 4 }}
-  namespace: voting-app
-  name: {{ .Values.worker.containers.name }}
-spec:
-  replicas: {{ .Values.replicaCount}}
-  selector:
-    matchLabels:
-      {{- include "voting-app.selectorLabels" . | nindent 6 }}
-  template:
-    metadata:
-      labels:
-        {{- include "voting-app.selectorLabels" . | nindent 8 }}
-    spec:
-      containers:
-      - image: {{ .Values.worker.image.repository }}
-        name: {{ .Values.worker.containers.name }}
-
