@@ -57,7 +57,7 @@ metadata:
   labels:
     {{- include "voting-app.labels" . | nindent 4 }}
   namespace: {{ .Values.redis.service.namespace | quote}}
-  name: {{ .Values.db.service.name | quote }}
+  name: {{ .Values.redis.service.name | quote }}
 spec:
   type: {{ .Values.redis.service.type }}
   ports:
