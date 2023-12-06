@@ -45,7 +45,7 @@ metadata:
 spec:
   type: {{ .Values.db.service.type }}
   ports:
-  - name: db-service
+  - name: "db-service"
     port: {{ .Values.db.service.port }}
     targetPort: {{ .Values.db.service.targetport }}
   selector:
@@ -61,7 +61,7 @@ metadata:
 spec:
   type: {{ .Values.redis.service.type }}
   ports:
-  - name: redis-service
+  - name: "redis-service"
     port: {{ .Values.redis.service.port }}
     targetPort: {{ .Values.redis.service.targetport }}
   selector:

@@ -128,7 +128,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .Values.worker.containers.name }}
+        {{- include "voting-app.selectorLabels" . | nindent 8 }}
     spec:
       containers:
       - image: {{ .Values.worker.image.repository }}
