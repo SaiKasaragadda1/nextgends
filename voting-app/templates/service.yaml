@@ -30,7 +30,7 @@ spec:
   - name: "result-service"
     port: {{ .Values.result.service.port }}
     targetPort: {{ .Values.result.service.targetport }}
-    nodePort: {{ .Values.vote.service.nodeport }}
+    nodePort: {{ .Values.result.service.nodeport }}
     protocol: TCP
   selector:
      {{- include "voting-app.selectorLabels" . | nindent 4 }}
