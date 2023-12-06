@@ -66,34 +66,3 @@ spec:
     targetPort: {{ .Values.redis.service.targetport }}
   selector:
     {{- include "voting-app.selectorLabels" . | nindent 4 }}
-  
-
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  namespace: {{ .Values.vote.service.namespace | quote}}
-  name: ingress-alb-vote
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
-    alb.ingress.kubernetes.io/ssl-redirect: '443'
-spec:
-  tls:
-  - hosts:
-    - vote-nextgends-rac3.axle-interns.com
-    secretName: vote-cert
-  ingressClassName: alb
-  rules:
-    - host: vote-nextgends-rac3.axle-interns.com
-      http:
-        paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: vote
-              port:
-                number: 5000    
