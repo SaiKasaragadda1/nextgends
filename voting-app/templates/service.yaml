@@ -66,3 +66,53 @@ spec:
     targetPort: {{ .Values.redis.service.targetport }}
   selector:
     {{- include "voting-app.selectorLabels" . | nindent 4 }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: voting-app
+  name: ingress-alb-vote
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-2:853931821519:certificate/bf5d99a8-38bc-46e9-a631-06732f99cb08
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+spec:
+  ingressClassName: alb
+  rules:
+    - host: sairac3.axle-interns.com
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: vote
+              port:
+                number: 5000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: voting-app
+  name: ingress-alb-result
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:853931821519:certificate/940dc7b3-c7ab-45fe-b3e7-7922417bf171
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+spec:
+  ingressClassName: alb
+  rules:
+    - host: ad-rac3.axle-interns.com
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: result
+              port:
+                number: 5001
