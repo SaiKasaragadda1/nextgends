@@ -3,7 +3,7 @@ replicaCount: 1
 
 result:
   image:
-    repository: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-regi
+    repository: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:result
  
   service:
     type: NodePort
@@ -23,7 +23,7 @@ vote:
   service:
     type: NodePort
     port: 5000
-    name: result
+    name: vote
     namespace: voting-app
     targetport: 80
     nodeport: 31000
@@ -31,6 +31,41 @@ vote:
   containers:
     name: vote
 
+db:    
+  image:
+    repository: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:postgres
+
+  service:
+    type: ClusterIP
+    port: 5432
+    name: db-service
+    namespace: voting-app
+    targetport: 5432
+
+  containers:
+    name: db
+
+redis:    
+  image:
+    repository: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:redis
+
+  service:
+    type: ClusterIP
+    port: 6379
+    name: redis-service
+    namespace: voting-app
+    targetport: 6379
+
+  containers:
+    name: redis
+
+worker:    
+  image:
+    repository: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:worker
+
+  containers:
+    name: worker
+   
 ingress:
   enabled: false
   className: ""
