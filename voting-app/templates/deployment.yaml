@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ .Values.vote.containers.name }}
+  app: "vote"
   name: {{ .Values.vote.service.name | quote }}
   namespace: {{ .Values.vote.service.namespace | quote}}
 spec:
