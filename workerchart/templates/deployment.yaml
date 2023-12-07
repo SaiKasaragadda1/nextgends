@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "workerchart.labels" . | nindent 4 }}
+  namespace: voting-app
+  name: {{ .Values.worker.containers.name }}
+spec:
+  replicas: {{ .Values.replicaCount}}
+  selector:
+    matchLabels:
+      {{- include "workerchart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "workerchart.labels" . | nindent 8 }}
+    spec:
+      containers:
+      - image: {{ .Values.worker.image.repository }}
+        name: {{ .Values.worker.containers.name }}

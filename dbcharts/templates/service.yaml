@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    {{- include "dbcharts.labels" . | nindent 4 }}
+  namespace: {{ .Values.db.service.namespace | quote}}
+  name: {{ .Values.db.containers.app | quote }}
+spec:
+  type: {{ .Values.db.service.type }}
+  ports:
+  - name: "db-service"
+    port: {{ .Values.db.service.port }}
+    targetPort: {{ .Values.db.service.targetport }}
+  selector:
+    {{- include "dbcharts.selectorLabels" . | nindent 4 }}

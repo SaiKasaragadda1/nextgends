@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    {{- include "redischart.labels" . | nindent 4 }}
+  namespace: {{ .Values.redis.service.namespace | quote}}
+  name: {{ .Values.redis.containers.name | quote }}
+spec:
+  type: {{ .Values.redis.service.type }}
+  ports:
+  - name: "redis-service"
+    port: {{ .Values.redis.service.port }}
+    targetPort: {{ .Values.redis.service.targetport }}
+  selector:
+    {{- include "redischart.selectorLabels" . | nindent 4 }}

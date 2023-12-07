@@ -1,0 +1,9 @@
+
+replicaCount: 1
+
+worker:    
+  image:
+    repository: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:worker
+
+  containers:
+    name: worker

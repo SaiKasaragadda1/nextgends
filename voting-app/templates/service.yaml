@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.vote.service.name | quote }}
   namespace: {{ .Values.vote.service.namespace | quote}}
   labels:
-    app: {{ .Values.vote.containers.name }}
+    {{- include "voting-app.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.vote.service.type }}
   ports:
@@ -15,104 +15,54 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: {{ .Values.vote.containers.name }}
+    {{- include "voting-app.selectorLabels" . | nindent 4 }}
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: {{ .Values.result.containers.name }}
-  namespace: {{ .Values.result.service.namespace | quote}}
-  name: {{ .Values.result.service.name | quote }}
-spec:
-  type: {{ .Values.result.service.type }}
-  ports:
-  - name: "result-service"
-    port: {{ .Values.result.service.port }}
-    targetPort: {{ .Values.result.service.targetport }}
-    nodePort: {{ .Values.result.service.nodeport }}
-    protocol: TCP
-  selector:
-    app: {{ .Values.result.containers.name }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-     app: {{ .Values.db.containers.app }}
-  namespace: {{ .Values.db.service.namespace | quote}}
-  name: {{ .Values.db.containers.app | quote }}
-spec:
-  type: {{ .Values.db.service.type }}
-  ports:
-  - name: "db-service"
-    port: {{ .Values.db.service.port }}
-    targetPort: {{ .Values.db.service.targetport }}
-  selector:
-    app: {{ .Values.db.containers.app }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: {{ .Values.redis.containers.name }}
-  namespace: {{ .Values.redis.service.namespace | quote}}
-  name: {{ .Values.redis.containers.name | quote }}
-spec:
-  type: {{ .Values.redis.service.type }}
-  ports:
-  - name: "redis-service"
-    port: {{ .Values.redis.service.port }}
-    targetPort: {{ .Values.redis.service.targetport }}
-  selector:
-    app: {{ .Values.redis.containers.name }}
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  namespace: voting-app
-  name: ingress-alb-vote
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-2:853931821519:certificate/bf5d99a8-38bc-46e9-a631-06732f99cb08
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
-    alb.ingress.kubernetes.io/ssl-redirect: '443'
-spec:
-  ingressClassName: alb
-  rules:
-    - host: sairac3.axle-interns.com
-      http:
-        paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: {{ .Values.vote.service.name }}
-              port:
-                number: 5000
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  namespace: voting-app
-  name: ingress-alb-result
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-2:853931821519:certificate/79d88fbc-1a5d-44bb-9d36-9aa8776f4564
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
-    alb.ingress.kubernetes.io/ssl-redirect: '443'
-spec:
-  ingressClassName: alb
-  rules:
-    - host: result.axle-interns.com
-      http:
-        paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: {{ .Values.result.service.name  }}
-              port:
-                number: 5001
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   namespace: voting-app
+#   name: ingress-alb-vote
+#   annotations:
+#     alb.ingress.kubernetes.io/scheme: internet-facing
+#     alb.ingress.kubernetes.io/target-type: ip
+#     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-2:853931821519:certificate/bf5d99a8-38bc-46e9-a631-06732f99cb08
+#     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+#     alb.ingress.kubernetes.io/ssl-redirect: '443'
+# spec:
+#   ingressClassName: alb
+#   rules:
+#     - host: sairac3.axle-interns.com
+#       http:
+#         paths:
+#         - path: /
+#           pathType: Prefix
+#           backend:
+#             service:
+#               name: {{ .Values.vote.service.name }}
+#               port:
+#                 number: 5000
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   namespace: voting-app
+#   name: ingress-alb-result
+#   annotations:
+#     alb.ingress.kubernetes.io/scheme: internet-facing
+#     alb.ingress.kubernetes.io/target-type: ip
+#     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-2:853931821519:certificate/79d88fbc-1a5d-44bb-9d36-9aa8776f4564
+#     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+#     alb.ingress.kubernetes.io/ssl-redirect: '443'
+# spec:
+#   ingressClassName: alb
+#   rules:
+#     - host: result.axle-interns.com
+#       http:
+#         paths:
+#         - path: /
+#           pathType: Prefix
+#           backend:
+#             service:
+#               name: {{ .Values.result.service.name  }}
+#               port:
+#                 number: 5001

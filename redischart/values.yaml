@@ -1,0 +1,19 @@
+# Default values for redischart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+redis:    
+  image:
+    repository: 853931821519.dkr.ecr.us-east-1.amazonaws.com/devsecops-rac3-registry:redis
+
+  service:
+    type: ClusterIP
+    port: 6379
+    name: redis-service
+    namespace: voting-app
+    targetport: 6379
+
+  containers:
+    name: redis

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "redischart.labels" . | nindent 4 }}
+  namespace: voting-app
+  name: {{ .Values.redis.containers.name }}
+spec:
+  replicas: {{ .Values.replicaCount}}
+  selector:
+    matchLabels:
+      {{- include "redischart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "redischart.labels" . | nindent 8 }}
+    spec:
+      containers:
+      - image: {{ .Values.redis.image.repository }}
+        name: {{ .Values.redis.containers.name }}
+        ports:
+        - containerPort: {{ .Values.redis.service.port }}
+          name: {{ .Values.redis.containers.name }}
+        volumeMounts:
+        - mountPath: /data
+          name: redis-data
+      volumes:
+      - name: redis-data
+        emptyDir: {} 
