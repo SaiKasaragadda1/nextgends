@@ -41,7 +41,7 @@ metadata:
   labels:
      {{- include "voting-app.labels" . | nindent 4 }}
   namespace: {{ .Values.db.service.namespace | quote}}
-  name: {{ .Values.db.service.name | quote }}
+  name: {{ .Values.db.containers.app | quote }}
 spec:
   type: {{ .Values.db.service.type }}
   ports:
@@ -49,7 +49,7 @@ spec:
     port: {{ .Values.db.service.port }}
     targetPort: {{ .Values.db.service.targetport }}
   selector:
-    {{- include "voting-app.selectorLabels" . | nindent 4 }}
+    app: {{ .Values.db.containers.app }}
 ---
 apiVersion: v1
 kind: Service
@@ -57,7 +57,7 @@ metadata:
   labels:
     {{- include "voting-app.labels" . | nindent 4 }}
   namespace: {{ .Values.redis.service.namespace | quote}}
-  name: {{ .Values.redis.service.name | quote }}
+  name: {{ .Values.redis.containers.name | quote }}
 spec:
   type: {{ .Values.redis.service.type }}
   ports:
@@ -65,7 +65,7 @@ spec:
     port: {{ .Values.redis.service.port }}
     targetPort: {{ .Values.redis.service.targetport }}
   selector:
-    {{- include "voting-app.selectorLabels" . | nindent 4 }}
+    app: {{ .Values.redis.containers.name }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -88,7 +88,7 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: vote
+              name: {{ .Values.vote.service.name }}
               port:
                 number: 5000
 ---
@@ -113,6 +113,6 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: result
+              name: {{ .Values.result.service.name  }}
               port:
                 number: 5001
