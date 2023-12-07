@@ -9,7 +9,7 @@ spec:
   replicas: {{ .Values.replicaCount}}
   selector:
     matchLabels:
-      {{- include "voting-app.selectorLabels" . | nindent 4 }}
+      {{- include "voting-app.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
