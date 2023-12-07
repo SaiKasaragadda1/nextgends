@@ -100,13 +100,13 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:853931821519:certificate/940dc7b3-c7ab-45fe-b3e7-7922417bf171
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-2:853931821519:certificate/79d88fbc-1a5d-44bb-9d36-9aa8776f4564
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
     alb.ingress.kubernetes.io/ssl-redirect: '443'
 spec:
   ingressClassName: alb
   rules:
-    - host: ad-rac3.axle-interns.com
+    - host: result.axle-interns.com
       http:
         paths:
         - path: /
