@@ -2,18 +2,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    {{- include "voting-app.labels" . | nindent 4 }}
+    app: {{ .Values.vote.containers.name }}
   name: {{ .Values.vote.service.name | quote }}
   namespace: {{ .Values.vote.service.namespace | quote}}
 spec:
   replicas: {{ .Values.replicaCount}}
   selector:
     matchLabels:
-      {{- include "voting-app.selectorLabels" . | nindent 6 }}
+      app: {{ .Values.vote.containers.name }}
   template:
     metadata:
       labels:
-        {{- include "voting-app.selectorLabels" . | nindent 8 }}
+        app: {{ .Values.vote.containers.name }}
     spec:
       containers:
       - image: {{ .Values.vote.image.repository}}
@@ -27,18 +27,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    {{- include "voting-app.labels" . | nindent 4 }}
+    app: {{ .Values.result.containers.name }}
   name: {{ .Values.result.service.name | quote }}
   namespace: {{ .Values.result.service.namespace | quote}}
 spec:
   replicas: {{ .Values.replicaCount}}
   selector:
     matchLabels:
-      {{- include "voting-app.selectorLabels" . | nindent 6 }}
+      app: {{ .Values.result.containers.name }}
   template:
     metadata:
       labels:
-        {{- include "voting-app.selectorLabels" . | nindent 8 }}
+        app: {{ .Values.result.containers.name }}
     spec:
       containers:
       - image: {{ .Values.result.image.repository}}
@@ -52,18 +52,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    {{- include "voting-app.labels" . | nindent 4 }}
+    app: {{ .Values.db.containers.app }}
   namespace: voting-app
   name: {{ .Values.db.containers.name}}
 spec:
   replicas: {{ .Values.replicaCount}}
   selector:
     matchLabels:
-      {{- include "voting-app.selectorLabels" . | nindent 6 }}
+      app: {{ .Values.db.containers.app }}
   template:
     metadata:
       labels:
-        {{- include "voting-app.selectorLabels" . | nindent 8 }}
+        app: {{ .Values.db.containers.app }}
     spec:
       containers:
       - image: {{ .Values.db.image.repository }}
@@ -87,18 +87,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    {{- include "voting-app.labels" . | nindent 4 }}
+    app: {{ .Values.redis.containers.name }}
   namespace: voting-app
   name: {{ .Values.redis.containers.name }}
 spec:
   replicas: {{ .Values.replicaCount}}
   selector:
     matchLabels:
-      {{- include "voting-app.selectorLabels" . | nindent 6 }}
+      app: {{ .Values.redis.containers.name }}
   template:
     metadata:
       labels:
-        {{- include "voting-app.selectorLabels" . | nindent 8 }}
+        app: {{ .Values.redis.containers.name }}
     spec:
       containers:
       - image: {{ .Values.redis.image.repository }}
@@ -117,18 +117,18 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    {{- include "voting-app.labels" . | nindent 4 }}
+    app: {{ .Values.worker.containers.name }}
   namespace: voting-app
   name: {{ .Values.worker.containers.name }}
 spec:
   replicas: {{ .Values.replicaCount}}
   selector:
     matchLabels:
-      {{- include "voting-app.selectorLabels" . | nindent 6 }}
+      app: {{ .Values.worker.containers.name }}
   template:
     metadata:
       labels:
-        {{- include "voting-app.selectorLabels" . | nindent 8 }}
+        app: {{ .Values.worker.containers.name }}
     spec:
       containers:
       - image: {{ .Values.worker.image.repository }}

@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.vote.service.name | quote }}
   namespace: {{ .Values.vote.service.namespace | quote}}
   labels:
-    {{- include "voting-app.labels" . | nindent 4 }}
+    app: {{ .Values.vote.containers.name }}
 spec:
   type: {{ .Values.vote.service.type }}
   ports:
@@ -21,7 +21,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    {{- include "voting-app.labels" . | nindent 4 }}
+    app: {{ .Values.result.containers.name }}
   namespace: {{ .Values.result.service.namespace | quote}}
   name: {{ .Values.result.service.name | quote }}
 spec:
@@ -39,7 +39,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-     {{- include "voting-app.labels" . | nindent 4 }}
+     app: {{ .Values.db.containers.app }}
   namespace: {{ .Values.db.service.namespace | quote}}
   name: {{ .Values.db.containers.app | quote }}
 spec:
@@ -55,7 +55,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    {{- include "voting-app.labels" . | nindent 4 }}
+    app: {{ .Values.redis.containers.name }}
   namespace: {{ .Values.redis.service.namespace | quote}}
   name: {{ .Values.redis.containers.name | quote }}
 spec:
